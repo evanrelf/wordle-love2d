@@ -6,10 +6,12 @@ if dev then
 end
 
 function love.load()
-  letters = {
+  answer = {'p', 'e', 'a', 'c', 'h'}
+  guesses = {
     {'f', 'r', 'a', 'm', 'e'},
     {'p', 'e', 'a', 'c', 'h'},
   }
+
   windowWidth = 500
   windowHeight = 1000
 
@@ -53,18 +55,42 @@ function drawBoxes()
   local width = size - margin
   local height = size - margin
 
-  love.graphics.setColor(0.8, 0.8, 0.8, 1)
   love.graphics.setLineWidth(2)
   for row = 0, rows - 1 do
     for column = 0, columns - 1 do
       local x = (size * column) + margin
       local y = (size * row) + margin + yOffset
 
-      love.graphics.rectangle("line", x, y, width, height)
+      if guesses[row + 1] ~= nil and guesses[row + 1][column + 1] ~= nil then
+        letter = guesses[row + 1][column + 1]
 
-      if letters[row + 1] ~= nil and letters[row + 1][column + 1] ~= nil then
-        love.graphics.printf(letters[row + 1][column + 1], x, y + 15, width, "center")
+        if letter == answer[column + 1] then
+          -- Green
+          love.graphics.setColor(106/255, 170/255, 100/255, 1)
+        elseif elem(letter, answer) then
+          -- Yellow
+          love.graphics.setColor(201/255, 180/255, 88/255, 1)
+        else
+          -- Gray
+          love.graphics.setColor(120/255, 124/255, 126/255, 1)
+        end
+        love.graphics.rectangle("fill", x, y, width, height)
+
+        love.graphics.setColor(1, 1, 1, 1)
+        love.graphics.printf(letter, x, y + 15, width, "center")
+      else
+        love.graphics.setColor(0.8, 0.8, 0.8, 1)
+        love.graphics.rectangle("line", x, y, width, height)
       end
     end
   end
+end
+
+function elem(x, xs)
+  for index, value in ipairs(xs) do
+    if value == x then
+      return true
+    end
+  end
+  return false
 end
