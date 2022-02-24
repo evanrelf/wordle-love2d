@@ -43,13 +43,15 @@ end
 function drawTitle()
   love.graphics.setColor(0, 0, 0, 1)
   love.graphics.printf("Wordle", 0, 10, windowWidth, "center")
+  love.graphics.setColor(0.8, 0.8, 0.8, 1)
+  love.graphics.rectangle("line", 0, 80, windowWidth, 1)
 end
 
 function drawBoxes()
   local rows = 6
   local columns = 5
   local margin = 10
-  local yOffset = 60
+  local yOffset = 90
 
   local size = (windowWidth - margin) / columns
   local width = size - margin
