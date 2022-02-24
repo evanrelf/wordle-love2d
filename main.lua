@@ -30,11 +30,6 @@ function love.load()
   love.graphics.setBackgroundColor(1, 1, 1, 1)
 end
 
-function love.keypressed(key, scancode, isrepeat)
-  letters[letterNumber] = scancode
-  letterNumber = letterNumber + 1
-end
-
 function love.update(dt)
 end
 
