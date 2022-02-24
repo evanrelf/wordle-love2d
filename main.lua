@@ -12,7 +12,8 @@ function love.load()
   }
   windowWidth = 500
   windowHeight = 1000
-  font = love.graphics.newFont("fonts/RobotoSlab-Bold.ttf", 40)
+
+  love.graphics.setNewFont("fonts/RobotoSlab-Bold.ttf", 40)
 
   currentWindowWidth, currentWindowHeight = love.graphics.getDimensions()
   if currentWindowWidth ~= windowWidth or currentWindowHeight ~= windowHeight then
@@ -43,7 +44,6 @@ function love.draw()
 end
 
 function drawTitle()
-  love.graphics.setFont(font)
   love.graphics.setColor(0, 0, 0, 1)
   love.graphics.printf("Wordle", 0, 10, windowWidth, "center")
 end
@@ -58,7 +58,6 @@ function drawBoxes()
   local width = size - margin
   local height = size - margin
 
-  love.graphics.setFont(font)
   love.graphics.setColor(0.8, 0.8, 0.8, 1)
   love.graphics.setLineWidth(2)
   for row = 0, rows - 1 do
